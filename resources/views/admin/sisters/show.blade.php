@@ -33,6 +33,62 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.sister.fields.self_image') }}
+                        </th>
+                        <td>
+                            @foreach($sister->self_image as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $media->getUrl('thumb') }}">
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.ktp_image') }}
+                        </th>
+                        <td>
+                            @foreach($sister->ktp_image as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $media->getUrl('thumb') }}">
+                                </a>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.province') }}
+                        </th>
+                        <td>
+                            {{ $sister->province }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.city') }}
+                        </th>
+                        <td>
+                            {{ $sister->city }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.sub_district') }}
+                        </th>
+                        <td>
+                            {{ $sister->sub_district }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.ward') }}
+                        </th>
+                        <td>
+                            {{ $sister->ward }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.sister.fields.address') }}
                         </th>
                         <td>
@@ -49,18 +105,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.sister.fields.self_image') }}
-                        </th>
-                        <td>
-                            @foreach($sister->self_image as $key => $media)
-                                <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $media->getUrl('thumb') }}">
-                                </a>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.sister.fields.age') }}
                         </th>
                         <td>
@@ -72,15 +116,9 @@
                             {{ trans('cruds.sister.fields.status') }}
                         </th>
                         <td>
-                            {{ App\Models\Sister::STATUS_SELECT[$sister->status] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.sister.fields.prefered_salary') }}
-                        </th>
-                        <td>
-                            {{ $sister->prefered_salary }}
+                            <span class="badge bg-{{ App\Models\Sister::BADGE_STATUS_COLOR[$sister->status] }}">
+                                {{ App\Models\Sister::STATUS_SELECT[$sister->status] ?? '' }}
+                            </span>
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +126,17 @@
                             {{ trans('cruds.sister.fields.type') }}
                         </th>
                         <td>
-                            {{ App\Models\Sister::TYPE_SELECT[$sister->type] ?? '' }}
+                            <span class="badge bg-{{ App\Models\Sister::BADGE_TYPE_COLOR[$sister->type] }}">
+                                {{ App\Models\Sister::TYPE_SELECT[$sister->type] ?? '' }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.sister.fields.prefered_salary') }}
+                        </th>
+                        <td>
+                            {{ $sister->getSalaryinString() }}
                         </td>
                     </tr>
                 </tbody>

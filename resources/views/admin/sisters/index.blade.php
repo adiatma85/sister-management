@@ -1,4 +1,12 @@
 @extends('layouts.admin')
+{{-- Custom Styles --}}
+@section('styles')
+    <style>
+        .customSearch {
+            width: 80px;
+        }
+    </style>
+@endsection
 @section('content')
 @can('sister_create')
     <div style="margin-bottom: 10px;" class="row">
@@ -29,16 +37,13 @@
                             {{ trans('cruds.sister.fields.name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.sister.fields.self_image') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.sister.fields.province') }}
                         </th>
                         <th>
                             {{ trans('cruds.sister.fields.city') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sister.fields.sub_district') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sister.fields.ward') }}
                         </th>
                         <th>
                             {{ trans('cruds.sister.fields.address') }}
@@ -47,19 +52,10 @@
                             {{ trans('cruds.sister.fields.number') }}
                         </th>
                         <th>
-                            {{ trans('cruds.sister.fields.self_image') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sister.fields.ktp_image') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.sister.fields.age') }}
                         </th>
                         <th>
                             {{ trans('cruds.sister.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.sister.fields.prefered_salary') }}
                         </th>
                         <th>
                             {{ trans('cruds.sister.fields.type') }}
@@ -72,38 +68,29 @@
                         <td>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
                         <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <select class="search" strict="true">
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <select class="search customSearch" strict="true">
                                 <option value>{{ trans('global.all') }}</option>
                                 @foreach(App\Models\Sister::STATUS_SELECT as $key => $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
@@ -111,10 +98,7 @@
                             </select>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search" strict="true">
+                            <select class="search customSearch" strict="true">
                                 <option value>{{ trans('global.all') }}</option>
                                 @foreach(App\Models\Sister::TYPE_SELECT as $key => $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
@@ -138,16 +122,17 @@
                                 {{ $sister->name ?? '' }}
                             </td>
                             <td>
+                                @foreach($sister->self_image as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $media->getUrl('thumb') }}">
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
                                 {{ $sister->province ?? '' }}
                             </td>
                             <td>
                                 {{ $sister->city ?? '' }}
-                            </td>
-                            <td>
-                                {{ $sister->sub_district ?? '' }}
-                            </td>
-                            <td>
-                                {{ $sister->ward ?? '' }}
                             </td>
                             <td>
                                 {{ $sister->address ?? '' }}
@@ -156,30 +141,17 @@
                                 {{ $sister->number ?? '' }}
                             </td>
                             <td>
-                                @foreach($sister->self_image as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                @foreach($sister->ktp_image as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
                                 {{ $sister->age ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Sister::STATUS_SELECT[$sister->status] ?? '' }}
+                                <span class="badge bg-{{ App\Models\Sister::BADGE_STATUS_COLOR[$sister->status] }}">
+                                    {{ App\Models\Sister::STATUS_SELECT[$sister->status] ?? '' }}
+                                </span>
                             </td>
                             <td>
-                                {{ $sister->prefered_salary ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\Sister::TYPE_SELECT[$sister->type] ?? '' }}
+                                <span class="badge bg-{{ App\Models\Sister::BADGE_TYPE_COLOR[$sister->type] }}">
+                                    {{ App\Models\Sister::TYPE_SELECT[$sister->type] ?? '' }}
+                                </span>
                             </td>
                             <td>
                                 @can('sister_show')

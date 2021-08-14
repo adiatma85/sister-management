@@ -28,6 +28,18 @@ class Sister extends Model implements HasMedia
         'Patient Sister' => 'Suster Pasien',
     ];
 
+    public const BADGE_TYPE_COLOR = [
+        'Pembantu'  => 'primary',
+        'Baby Sister' => 'success',
+        'Patient Sister' => 'danger'
+    ];
+
+    public const BADGE_STATUS_COLOR = [
+        'assigned' => 'danger',
+        'open' => 'success',
+        'unknown' => 'secondary'
+    ];
+
     public $table = 'sisters';
 
     protected $appends = [
@@ -91,5 +103,10 @@ class Sister extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    // Helper functions
+    public function getSalaryinString(){
+        return "Rp. " . number_format($this->prefered_salary, 0, ",", ".") . ",00";
     }
 }
