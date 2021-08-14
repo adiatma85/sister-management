@@ -37,11 +37,18 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // Custom middleware
+            \App\Http\Middleware\AuthGates::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // Add Sanctum
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            // Custom middleware
+            // \App\Http\Middleware\AuthGates::class,
         ],
     ];
 
