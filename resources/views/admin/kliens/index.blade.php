@@ -1,4 +1,11 @@
 @extends('layouts.admin')
+@section('styles')
+    <style>
+        .customSearch {
+            width: 80px;
+        }
+    </style>
+@endsection
 @section('content')
 @can('klien_create')
     <div style="margin-bottom: 10px;" class="row">
@@ -29,6 +36,9 @@
                             {{ trans('cruds.klien.fields.name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.klien.fields.self_image') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.klien.fields.province') }}
                         </th>
                         <th>
@@ -47,12 +57,6 @@
                             {{ trans('cruds.klien.fields.address') }}
                         </th>
                         <th>
-                            {{ trans('cruds.klien.fields.self_image') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.klien.fields.status') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -60,38 +64,30 @@
                         <td>
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
                         <td>
-                            <select class="search" strict="true">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\Klien::STATUS_SELECT as $key => $item)
-                                    <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
+                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                         </td>
@@ -110,6 +106,13 @@
                                 {{ $klien->name ?? '' }}
                             </td>
                             <td>
+                                @foreach($klien->self_image as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $media->getUrl('thumb') }}">
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
                                 {{ $klien->province ?? '' }}
                             </td>
                             <td>
@@ -126,16 +129,6 @@
                             </td>
                             <td>
                                 {{ $klien->address ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($klien->self_image as $key => $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ App\Models\Klien::STATUS_SELECT[$klien->status] ?? '' }}
                             </td>
                             <td>
                                 @can('klien_show')

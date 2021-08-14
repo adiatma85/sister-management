@@ -33,22 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.klien.fields.number') }}
-                        </th>
-                        <td>
-                            {{ $klien->number }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.klien.fields.address') }}
-                        </th>
-                        <td>
-                            {{ $klien->address }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.klien.fields.self_image') }}
                         </th>
                         <td>
@@ -61,10 +45,50 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.klien.fields.status') }}
+                            {{ trans('cruds.klien.fields.province') }}
                         </th>
                         <td>
-                            {{ App\Models\Klien::STATUS_SELECT[$klien->status] ?? '' }}
+                            {{ $klien->province }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.klien.fields.city') }}
+                        </th>
+                        <td>
+                            {{ $klien->city }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.klien.fields.sub_district') }}
+                        </th>
+                        <td>
+                            {{ $klien->sub_district }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.klien.fields.ward') }}
+                        </th>
+                        <td>
+                            {{ $klien->ward }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.klien.fields.number') }}
+                        </th>
+                        <td>
+                            {{ $klien->number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.klien.fields.address') }}
+                        </th>
+                        <td>
+                            {{ $klien->address }}
                         </td>
                     </tr>
                 </tbody>

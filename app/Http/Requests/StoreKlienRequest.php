@@ -41,9 +41,9 @@ class StoreKlienRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'status' => [
-                'required',
-            ],
+            // 'status' => [
+            //     'required',
+            // ],
             'number' => [
                 'string',
                 'nullable',
