@@ -14,6 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
+    // Permissions
+    Route::apiResource('permissions', 'PermissionsApiController');
+
+    // Roles
+    Route::apiResource('roles', 'RolesApiController');
+
+    // Users
+    Route::apiResource('users', 'UsersApiController');
+
+    // Sister
+    Route::post('sisters/media', 'SisterApiController@storeMedia')->name('sisters.storeMedia');
+    Route::apiResource('sisters', 'SisterApiController');
+
+    // Klien
+    Route::post('kliens/media', 'KlienApiController@storeMedia')->name('kliens.storeMedia');
+    Route::apiResource('kliens', 'KlienApiController');
+
+    // Contract
+    Route::apiResource('contracts', 'ContractApiController');
 });
