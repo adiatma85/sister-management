@@ -63,15 +63,44 @@ Route::prefix('admin')
         Route::resource('users', AdminUserController::class);
 
         // Sister
-        Route::delete('sisters/destroy', [AdminSisterController::class, 'massDestroy'])->name('sisters.massDestroy');
-        Route::post('sisters/media', [AdminSisterController::class, 'storeMedia'])->name('sisters.storeMedia');
-        Route::post('sisters/ckmedia', [AdminSisterController::class, 'storeCKEditorImages'])->name('sisters.storeCKEditorImages');
+        Route::prefix('sisters')
+            ->as('sisters.')
+            ->group(function () {
+
+                // Handle
+                Route::prefix('handle')
+                    ->as('handle.')
+                    ->group(function () {
+                        Route::get('city/{provinceId}', [AdminSisterController::class, 'handleCity'])->name('city');
+                        Route::get('sub-district/{cityId}', [AdminSisterController::class, 'handleSubDistrict'])->name('subDisctrict');
+                        Route::get('ward/{subDistrictId}', [AdminSisterController::class, 'handleWard'])->name('ward');
+                    });
+
+                Route::delete('destroy', [AdminSisterController::class, 'massDestroy'])->name('massDestroy');
+                Route::post('media', [AdminSisterController::class, 'storeMedia'])->name('storeMedia');
+                Route::post('ckmedia', [AdminSisterController::class, 'storeCKEditorImages'])->name('storeCKEditorImages');
+            });
         Route::resource('sisters', AdminSisterController::class);
 
         // Klien
-        Route::delete('kliens/destroy', [AdminKlienController::class, 'massDestroy'])->name('kliens.massDestroy');
-        Route::post('kliens/media', [AdminKlienController::class, 'storeMedia'])->name('kliens.storeMedia');
-        Route::post('kliens/ckmedia', [AdminKlienController::class, 'storeCKEditorImages'])->name('kliens.storeCKEditorImages');
+        Route::prefix('kliens')
+            ->as('kliens.')
+            ->group(function () {
+
+                // Handle
+                Route::prefix('handle')
+                    ->as('handle.')
+                    ->group(function () {
+                        Route::get('city/{provinceId}', [AdminKlienController::class, 'handleCity'])->name('city');
+                        Route::get('sub-district/{cityId}', [AdminKlienController::class, 'handleSubDistrict'])->name('subDisctrict');
+                        Route::get('ward/{subDistrictId}', [AdminKlienController::class, 'handleWard'])->name('ward');
+                    });
+
+                Route::delete('destroy', [AdminKlienController::class, 'massDestroy'])->name('massDestroy');
+                Route::post('media', [AdminKlienController::class, 'storeMedia'])->name('storeMedia');
+                Route::post('ckmedia', [AdminKlienController::class, 'storeCKEditorImages'])->name('storeCKEditorImages');
+            });
+
         Route::resource('kliens', AdminKlienController::class);
 
         // Contract
@@ -79,15 +108,15 @@ Route::prefix('admin')
         Route::resource('contracts', AdminContractController::class);
     });
 
-    // Profile
+// Profile
 Route::prefix('profile')
     ->as('profile.')
     ->middleware(['auth'])
-    ->group( function () {
+    ->group(function () {
         if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
             Route::get('password', [AuthChangePasswordController::class, 'edit'])->name('password.edit');
             Route::post('password', [AuthChangePasswordController::class, 'update'])->name('password.update');
             Route::post('profile', [AuthChangePasswordController::class, 'updateProfile'])->name('password.updateProfile');
             Route::post('profile/destroy', [AuthChangePasswordController::class, 'destroy'])->name('password.destroyProfile');
-        }    
-    } );
+        }
+    });

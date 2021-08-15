@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
+use App\Http\Controllers\Traits\HandleAPIDaerahIndo;
 use App\Http\Requests\MassDestroyKlienRequest;
 use App\Http\Requests\StoreKlienRequest;
 use App\Http\Requests\UpdateKlienRequest;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 class KlienController extends Controller
 {
     use MediaUploadingTrait;
+    use HandleAPIDaerahIndo;
 
     public function index()
     {

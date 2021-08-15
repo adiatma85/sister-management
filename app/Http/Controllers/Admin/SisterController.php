@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
+use App\Http\Controllers\Traits\HandleAPIDaerahIndoTrait;
 use App\Http\Requests\MassDestroySisterRequest;
 use App\Http\Requests\StoreSisterRequest;
 use App\Http\Requests\UpdateSisterRequest;
@@ -16,9 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
 class SisterController extends Controller
 {
     use MediaUploadingTrait;
+    use HandleAPIDaerahIndoTrait;
 
     public function index()
     {
+
         abort_if(Gate::denies('sister_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $sisters = Sister::with(['media'])->get();
@@ -29,8 +32,9 @@ class SisterController extends Controller
     public function create()
     {
         abort_if(Gate::denies('sister_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $listProvinsi = $this->handleProvince();
 
-        return view('admin.sisters.create');
+        return view('admin.sisters.create', 'listProvinsi');
     }
 
     public function store(StoreSisterRequest $request)
