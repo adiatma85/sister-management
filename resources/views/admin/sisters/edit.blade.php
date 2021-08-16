@@ -23,7 +23,7 @@
                 <select class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}" name="province" id="province" required>
                     <option value disabled {{ old('province', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach($listProvinsi as $key => $provinsi)
-                        <option value="{{ $provinsi->id }}" {{ old('province', '') === (string) $key ? 'selected' : '' }}>{{ $provinsi->nama }}</option>
+                        <option value="{{ $provinsi->id }}" {{ old('province', $sister->province) === (string) $provinsi->id ? 'selected' : '' }}>{{ $provinsi->nama }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('province'))
@@ -35,6 +35,9 @@
                 <label class="required" for="city">{{ trans('cruds.sister.fields.city') }}</label>
                 <select class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" name="city" id="city" required>
                     <option value disabled {{ old('city', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKota as $key => $kota)
+                        <option value="{{ $kota->id }}" {{ old('city', $sister->city) === (string) $kota->id ? 'selected' : '' }}>{{ $kota->nama }}</option>
+                    @endforeach
                     {{-- Added via Ajax JS --}}
                 </select>
                 @if($errors->has('city'))
@@ -46,6 +49,9 @@
                 <label class="required" for="sub_district">{{ trans('cruds.sister.fields.sub_district') }}</label>
                 <select class="form-control {{ $errors->has('sub_district') ? 'is-invalid' : '' }}" name="sub_district" id="sub_district" required>
                     <option value disabled {{ old('sub_district', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKecamatan as $key => $kecamatan)
+                        <option value="{{ $kecamatan->id }}" {{ old('sub_district', $sister->sub_district) === (string) $kecamatan->id ? 'selected' : '' }}>{{ $kecamatan->nama }}</option>
+                    @endforeach
                     {{-- Added via Ajax JS --}}
                 </select>
                 @if($errors->has('sub_district'))
@@ -57,6 +63,9 @@
                 <label class="required" for="ward">{{ trans('cruds.sister.fields.ward') }}</label>
                 <select class="form-control {{ $errors->has('ward') ? 'is-invalid' : '' }}" name="ward" id="ward" required>
                     <option value disabled {{ old('ward', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKelurahan as $key => $kelurahan)
+                        <option value="{{ $kelurahan->id }}" {{ old('ward', $sister->ward) === (string) $kelurahan->id ? 'selected' : '' }}>{{ $kelurahan->nama }}</option>
+                    @endforeach
                     {{-- Added via Ajax JS --}}
                 </select>
                 @if($errors->has('ward'))

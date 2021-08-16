@@ -59,9 +59,17 @@ class SisterController extends Controller
     public function edit(Sister $sister)
     {
         abort_if(Gate::denies('sister_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $listProvinsi = $this->handleProvince();
 
-        return view('admin.sisters.edit', compact('sister', 'listProvinsi'));
+        $listProvinsi = $this->handleProvince();
+        $listKota = $this->handleCity($sister->province);
+        // return response()->json([
+        //     'listKota' => $listKota,
+        //     'idKota' => $sister->city
+        // ]);
+        $listKecamatan = $this->handleSubDistrict($sister->city);
+        $listKelurahan = $this->handleWard($sister->sub_district);
+
+        return view('admin.sisters.edit', compact('sister', 'listProvinsi', 'listKota', 'listKecamatan', 'listKelurahan'));
     }
 
     public function update(UpdateSisterRequest $request, Sister $sister)
