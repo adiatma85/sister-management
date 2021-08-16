@@ -6,12 +6,14 @@ use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Controllers\Traits\HandleAPIDaerahIndoTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Klien extends Model implements HasMedia
 {
+    use HandleAPIDaerahIndoTrait;
     use SoftDeletes;
     use InteractsWithMedia;
     use HasFactory;
@@ -69,5 +71,35 @@ class Klien extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    // Helper functions
+    public function getSalaryinString()
+    {
+        return "Rp. " . number_format($this->prefered_salary, 0, ",", ".") . ",00";
+    }
+
+    // Return name of Province
+    public function convertProvince()
+    {
+        return $this->getProvince($this->province)->nama;
+    }
+
+    // Return name of City
+    public function convertCity()
+    {
+        return $this->getCity($this->city)->nama;
+    }
+
+    // Return name of sub-district
+    public function convertSubDistrict()
+    {
+        return $this->getSubDistrict($this->sub_district)->nama;
+    }
+
+    // Return name of Ward
+    public function convertWard()
+    {
+        return $this->getWard($this->ward)->nama;
     }
 }

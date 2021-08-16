@@ -32,7 +32,9 @@ class KlienController extends Controller
     {
         abort_if(Gate::denies('klien_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kliens.create');
+        $listProvinsi = $this->handleProvince();
+
+        return view('admin.kliens.create', compact('listProvinsi'));
     }
 
     public function store(StoreKlienRequest $request)
@@ -54,7 +56,12 @@ class KlienController extends Controller
     {
         abort_if(Gate::denies('klien_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kliens.edit', compact('klien'));
+        $listProvinsi = $this->handleProvince();
+        $listKota = $this->handleCity($klien->province);
+        $listKecamatan = $this->handleSubDistrict($klien->city);
+        $listKelurahan = $this->handleWard($klien->sub_district);
+
+        return view('admin.kliens.edit', compact('klien', 'listProvinsi', 'listKota', 'listKecamatan', 'listKelurahan'));
     }
 
     public function update(UpdateKlienRequest $request, Klien $klien)

@@ -45,12 +45,6 @@
                             {{ trans('cruds.klien.fields.city') }}
                         </th>
                         <th>
-                            {{ trans('cruds.klien.fields.sub_district') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.klien.fields.ward') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.klien.fields.number') }}
                         </th>
                         <th>
@@ -70,12 +64,6 @@
                             <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
-                        </td>
-                        <td>
-                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                             <input class="search customSearch" type="text" placeholder="{{ trans('global.search') }}">
@@ -113,16 +101,10 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{ $klien->province ?? '' }}
+                                {{ $klien->convertProvince() ?? '' }}
                             </td>
                             <td>
-                                {{ $klien->city ?? '' }}
-                            </td>
-                            <td>
-                                {{ $klien->sub_district ?? '' }}
-                            </td>
-                            <td>
-                                {{ $klien->ward ?? '' }}
+                                {{ $klien->convertCity() ?? '' }}
                             </td>
                             <td>
                                 {{ $klien->number ?? '' }}

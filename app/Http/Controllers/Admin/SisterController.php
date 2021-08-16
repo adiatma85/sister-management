@@ -32,6 +32,7 @@ class SisterController extends Controller
     public function create()
     {
         abort_if(Gate::denies('sister_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         $listProvinsi = $this->handleProvince();
 
         return view('admin.sisters.create', compact('listProvinsi'));
@@ -62,10 +63,6 @@ class SisterController extends Controller
 
         $listProvinsi = $this->handleProvince();
         $listKota = $this->handleCity($sister->province);
-        // return response()->json([
-        //     'listKota' => $listKota,
-        //     'idKota' => $sister->city
-        // ]);
         $listKecamatan = $this->handleSubDistrict($sister->city);
         $listKelurahan = $this->handleWard($sister->sub_district);
 
