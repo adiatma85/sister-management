@@ -22,19 +22,19 @@ class StoreSisterRequest extends FormRequest
                 'required',
             ],
             'province' => [
-                'string',
+                'integer',
                 'required',
             ],
             'city' => [
-                'string',
+                'integer',
                 'required',
             ],
             'sub_district' => [
-                'string',
+                'integer',
                 'required',
             ],
             'ward' => [
-                'string',
+                'integer',
                 'required',
             ],
             'address' => [

@@ -34,7 +34,7 @@ class SisterController extends Controller
         abort_if(Gate::denies('sister_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $listProvinsi = $this->handleProvince();
 
-        return view('admin.sisters.create', 'listProvinsi');
+        return view('admin.sisters.create', compact('listProvinsi'));
     }
 
     public function store(StoreSisterRequest $request)
@@ -59,8 +59,9 @@ class SisterController extends Controller
     public function edit(Sister $sister)
     {
         abort_if(Gate::denies('sister_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $listProvinsi = $this->handleProvince();
 
-        return view('admin.sisters.edit', compact('sister'));
+        return view('admin.sisters.edit', compact('sister', 'listProvinsi'));
     }
 
     public function update(UpdateSisterRequest $request, Sister $sister)
