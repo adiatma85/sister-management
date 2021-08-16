@@ -129,10 +129,10 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{ $sister->province ?? '' }}
+                                {{ $sister->convertProvince() ?? '' }}
                             </td>
                             <td>
-                                {{ $sister->city ?? '' }}
+                                {{ $sister->convertCity() ?? '' }}
                             </td>
                             <td>
                                 {{ $sister->address ?? '' }}

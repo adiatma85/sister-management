@@ -48,7 +48,7 @@
                             {{ trans('cruds.klien.fields.province') }}
                         </th>
                         <td>
-                            {{ $klien->province }}
+                            {{ $klien->convertProvince() }}
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,7 @@
                             {{ trans('cruds.klien.fields.city') }}
                         </th>
                         <td>
-                            {{ $klien->city }}
+                            {{ $klien->convertCity() }}
                         </td>
                     </tr>
                     <tr>
@@ -64,7 +64,7 @@
                             {{ trans('cruds.klien.fields.sub_district') }}
                         </th>
                         <td>
-                            {{ $klien->sub_district }}
+                            {{ $klien->convertSubDistrict() }}
                         </td>
                     </tr>
                     <tr>
@@ -72,7 +72,7 @@
                             {{ trans('cruds.klien.fields.ward') }}
                         </th>
                         <td>
-                            {{ $klien->ward }}
+                            {{ $klien->convertWard() }}
                         </td>
                     </tr>
                     <tr>

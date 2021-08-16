@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
+use App\Http\Controllers\Traits\HandleAPIDaerahIndoTrait;
 use App\Http\Requests\MassDestroyKlienRequest;
 use App\Http\Requests\StoreKlienRequest;
 use App\Http\Requests\UpdateKlienRequest;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 class KlienController extends Controller
 {
     use MediaUploadingTrait;
+    use HandleAPIDaerahIndoTrait;
 
     public function index()
     {
@@ -30,7 +32,9 @@ class KlienController extends Controller
     {
         abort_if(Gate::denies('klien_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kliens.create');
+        $listProvinsi = $this->handleProvince();
+
+        return view('admin.kliens.create', compact('listProvinsi'));
     }
 
     public function store(StoreKlienRequest $request)
@@ -52,7 +56,12 @@ class KlienController extends Controller
     {
         abort_if(Gate::denies('klien_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kliens.edit', compact('klien'));
+        $listProvinsi = $this->handleProvince();
+        $listKota = $this->handleCity($klien->province);
+        $listKecamatan = $this->handleSubDistrict($klien->city);
+        $listKelurahan = $this->handleWard($klien->sub_district);
+
+        return view('admin.kliens.edit', compact('klien', 'listProvinsi', 'listKota', 'listKecamatan', 'listKelurahan'));
     }
 
     public function update(UpdateKlienRequest $request, Klien $klien)

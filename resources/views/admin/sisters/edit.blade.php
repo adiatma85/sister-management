@@ -20,7 +20,12 @@
             </div>
             <div class="form-group">
                 <label class="required" for="province">{{ trans('cruds.sister.fields.province') }}</label>
-                <input class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}" type="text" name="province" id="province" value="{{ old('province', $sister->province) }}" required>
+                <select class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}" name="province" id="province" required>
+                    <option value disabled {{ old('province', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listProvinsi as $key => $provinsi)
+                        <option value="{{ $provinsi->id }}" {{ old('province', $sister->province) === (string) $provinsi->id ? 'selected' : '' }}>{{ $provinsi->nama }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('province'))
                     <span class="text-danger">{{ $errors->first('province') }}</span>
                 @endif
@@ -28,7 +33,13 @@
             </div>
             <div class="form-group">
                 <label class="required" for="city">{{ trans('cruds.sister.fields.city') }}</label>
-                <input class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" type="text" name="city" id="city" value="{{ old('city', $sister->city) }}" required>
+                <select class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" name="city" id="city" required>
+                    <option value disabled {{ old('city', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKota as $key => $kota)
+                        <option value="{{ $kota->id }}" {{ old('city', $sister->city) === (string) $kota->id ? 'selected' : '' }}>{{ $kota->nama }}</option>
+                    @endforeach
+                    {{-- Added via Ajax JS --}}
+                </select>
                 @if($errors->has('city'))
                     <span class="text-danger">{{ $errors->first('city') }}</span>
                 @endif
@@ -36,7 +47,13 @@
             </div>
             <div class="form-group">
                 <label class="required" for="sub_district">{{ trans('cruds.sister.fields.sub_district') }}</label>
-                <input class="form-control {{ $errors->has('sub_district') ? 'is-invalid' : '' }}" type="text" name="sub_district" id="sub_district" value="{{ old('sub_district', $sister->sub_district) }}" required>
+                <select class="form-control {{ $errors->has('sub_district') ? 'is-invalid' : '' }}" name="sub_district" id="sub_district" required>
+                    <option value disabled {{ old('sub_district', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKecamatan as $key => $kecamatan)
+                        <option value="{{ $kecamatan->id }}" {{ old('sub_district', $sister->sub_district) === (string) $kecamatan->id ? 'selected' : '' }}>{{ $kecamatan->nama }}</option>
+                    @endforeach
+                    {{-- Added via Ajax JS --}}
+                </select>
                 @if($errors->has('sub_district'))
                     <span class="text-danger">{{ $errors->first('sub_district') }}</span>
                 @endif
@@ -44,7 +61,13 @@
             </div>
             <div class="form-group">
                 <label class="required" for="ward">{{ trans('cruds.sister.fields.ward') }}</label>
-                <input class="form-control {{ $errors->has('ward') ? 'is-invalid' : '' }}" type="text" name="ward" id="ward" value="{{ old('ward', $sister->ward) }}" required>
+                <select class="form-control {{ $errors->has('ward') ? 'is-invalid' : '' }}" name="ward" id="ward" required>
+                    <option value disabled {{ old('ward', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($listKelurahan as $key => $kelurahan)
+                        <option value="{{ $kelurahan->id }}" {{ old('ward', $sister->ward) === (string) $kelurahan->id ? 'selected' : '' }}>{{ $kelurahan->nama }}</option>
+                    @endforeach
+                    {{-- Added via Ajax JS --}}
+                </select>
                 @if($errors->has('ward'))
                     <span class="text-danger">{{ $errors->first('ward') }}</span>
                 @endif
@@ -260,4 +283,5 @@ Dropzone.options.ktpImageDropzone = {
      }
 }
 </script>
+@include('layouts.dependant-dropdown-script')
 @endsection
