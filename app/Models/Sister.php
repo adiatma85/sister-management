@@ -13,11 +13,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Sister extends Model implements HasMedia
 {
+    use HandleAPIDaerahIndoTrait;
     use SoftDeletes;
     use InteractsWithMedia;
     use HasFactory;
-
-    // use HandleAPIDaerahIndoTrait;
 
     public const STATUS_SELECT = [
         'assigned' => 'Sedang Bekerja',
@@ -115,26 +114,26 @@ class Sister extends Model implements HasMedia
     }
 
     // Return name of Province
-    // public function convertProvince()
-    // {
-    //     return $this->getProvince($this->province)->nama;
-    // }
+    public function convertProvince()
+    {
+        return $this->getProvince($this->province)->nama;
+    }
 
-    // // Return name of City
-    // public function convertCity()
-    // {
-    //     return $this->getCity($this->city)->nama;
-    // }
+    // Return name of City
+    public function convertCity()
+    {
+        return $this->getCity($this->city)->nama;
+    }
 
-    // // Return name of sub-district
-    // public function convertSubDistrict()
-    // {
-    //     return $this->getProvince($this->sub_district)->nama;
-    // }
+    // Return name of sub-district
+    public function convertSubDistrict()
+    {
+        return $this->getSubDistrict($this->sub_district)->nama;
+    }
 
-    // // Return name of Province
-    // public function convertWard()
-    // {
-    //     return $this->getProvince($this->ward)->nama;
-    // }
+    // Return name of Ward
+    public function convertWard()
+    {
+        return $this->getWard($this->ward)->nama;
+    }
 }
