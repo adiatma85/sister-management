@@ -13,6 +13,20 @@
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
+            <div class="row">
+                <div class="col-md-6 d-flex flex-column">
+                    <h2>Foto KTP</h2>
+                    @foreach($sister->ktp_image as $key => $media)
+                        <img src="{{ $media->getUrl() }}" alt="" class="img-fluid">     
+                    @endforeach
+                </div>
+                <div class="col-md-6 d-flex flex-column">
+                    <h2>Foto Diri</h2>
+                    @foreach($sister->self_image as $key => $media)
+                        <img src="{{ $media->getUrl() }}" alt="" class="img-fluid">     
+                    @endforeach
+                </div>
+            </div>
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
